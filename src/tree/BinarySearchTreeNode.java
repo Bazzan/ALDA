@@ -26,7 +26,7 @@ package tree;
  * 
  * @param <T>
  */
-@SuppressWarnings("unused") // Denna rad ska plockas bort. Den finns här
+//@SuppressWarnings("unused") // Denna rad ska plockas bort. Den finns här
 							// tillfälligt för att vi inte ska tro att det är
 							// fel i koden. Varningar ska normalt inte döljas på
 							// detta sätt, de är (oftast) fel som ska fixas.
@@ -41,18 +41,54 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public boolean add(T data) {
+		int comp = data.compareTo(this.data);
+		
+		if(comp < 0) {
+			this.left != null ?  :  add(this.data);
+			
+		}else if(comp > 0) {
+			this.right = new BinarySearchTreeNode(data);
+			
+		}else
 		return false;
+				
 	}
 
 	private T findMin() {
+		if(this.left == null) {
+			return this.data;
+		}
+		
+		
+		
 		return null;
 	}
 
 	public BinarySearchTreeNode<T> remove(T data) {
+		if(this == null) {
+			return this;
+		}
+		
+		int comp = data.compareTo(this.data);
+		
+		if(comp < 0) {
+			this.left.remove(data);
+		}
+		System.out.println(data);
 		return null;
 	}
 
 	public boolean contains(T data) {
+		int comp = data.compareTo(this.data);
+		
+		if(comp < 0) {
+			return left.contains(data);
+		}else if(comp > 0) {
+			return right.contains(data);
+		}else if(comp == 0) {
+			return true;
+		}
+		
 		return false;
 	}
 
