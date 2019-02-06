@@ -32,36 +32,70 @@ package tree;
 							// detta sätt, de är (oftast) fel som ska fixas.
 public class BinarySearchTreeNode<T extends Comparable<T>> {
 
-	private T data;
-	private BinarySearchTreeNode<T> left;
-	private BinarySearchTreeNode<T> right;
+	public T data;
+	public BinarySearchTreeNode<T> left;
+	public BinarySearchTreeNode<T> right;
 
 	public BinarySearchTreeNode(T data) {
 		this.data = data;
+		
+		
 	}
 
 	public boolean add(T data) {
 		int comp = data.compareTo(this.data);
 		
-		if(comp < 0) {
-			this.left != null ?  :  add(this.data);
+		if(this.data == data) {
+			return false;			
+		}else if(comp < 0) {
+			if(left == null) {
+				left = new BinarySearchTreeNode(data);
+				return true;
+			}else {
+				return left.add(data);
+			}
 			
 		}else if(comp > 0) {
-			this.right = new BinarySearchTreeNode(data);
-			
-		}else
-		return false;
+			if(right == null) {
+				right = new BinarySearchTreeNode(data);
+				return true;
+			}else
+				return right.add(data);
+		}else 
+			return false;
+
+//
+//		if(comp < 0) {
+//			this.left.add(data);
+//		}else if(comp > 0) {
+//			this.right.add(data);
+//		}else 
+//			return false;
+//		
+//		if(comp < 0) {
+//			this.left = new BinarySearchTreeNode<T>(data);
+//		}else if(comp > 0) {
+//			this.right = new BinarySearchTreeNode<T>(data);
+//		}else if (comp == 0) {
+//
+//			return true;
+//			
+//		}
+		
+	
 				
 	}
 
 	private T findMin() {
-		if(this.left == null) {
-			return this.data;
-		}
+		if(this.data == null) {
+			return null;
+		}else if(left == null) {
+			return data;
+		}return left.findMin();
 		
 		
 		
-		return null;
+//		return null;
 	}
 
 	public BinarySearchTreeNode<T> remove(T data) {
@@ -81,18 +115,28 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	public boolean contains(T data) {
 		int comp = data.compareTo(this.data);
 		
-		if(comp < 0) {
-			return left.contains(data);
-		}else if(comp > 0) {
-			return right.contains(data);
-		}else if(comp == 0) {
+		if(data == this.data) {
 			return true;
+		}else if(comp < 0) {
+			if(left == null) {
+				return false;
+			}else {
+				return left.contains(data);
+			}
+		}else if(comp > 0) {
+			if(right == null) {
+				return false;
+			}else {
+				return right.contains(data);
+			}
 		}
 		
 		return false;
 	}
 
 	public int size() {
+		int lSize =
+		
 		return 0;
 	}
 

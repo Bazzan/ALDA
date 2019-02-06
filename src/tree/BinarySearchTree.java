@@ -17,6 +17,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			root = new BinarySearchTreeNode<T>(data);
 			return true;
 		} else {
+
 			return root.add(data);
 		}
 	}
