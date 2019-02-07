@@ -63,26 +63,6 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 				return right.add(data);
 		}else 
 			return false;
-
-//
-//		if(comp < 0) {
-//			this.left.add(data);
-//		}else if(comp > 0) {
-//			this.right.add(data);
-//		}else 
-//			return false;
-//		
-//		if(comp < 0) {
-//			this.left = new BinarySearchTreeNode<T>(data);
-//		}else if(comp > 0) {
-//			this.right = new BinarySearchTreeNode<T>(data);
-//		}else if (comp == 0) {
-//
-//			return true;
-//			
-//		}
-		
-	
 				
 	}
 
@@ -99,17 +79,40 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public BinarySearchTreeNode<T> remove(T data) {
-		if(this == null) {
+		if(this.data == null) {
 			return this;
 		}
 		
 		int comp = data.compareTo(this.data);
 		
+//		if (data == this.data) {
+//			return this.data = null;
+//		
+//		}
 		if(comp < 0) {
-			this.left.remove(data);
-		}
-		System.out.println(data);
-		return null;
+			 return left.remove(data);
+		
+		}else if(comp > 0) {	
+			return right.remove(data);
+		
+		}else if(left != null && right != null) {	
+			this.data = right.findMin();
+			right.remove(this.data);
+
+		}else
+			this.data = (left != null ) ? left.remove(data) : right.remove(data);
+			return null;
+		
+			
+//		}else if(left == this) {
+//
+//			left = ( left != null ) ?  left : right;
+//		
+//		}else if(right == this) {
+//			right = ( left != null) ? left : right;
+//		}
+//		System.out.println(data);
+//		return null;
 	}
 
 	public boolean contains(T data) {
@@ -135,22 +138,19 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public int size() {
-		int lSize = 0;
-		int rSize = 0;
-
-		if(left != null) {
-			lSize = left.size() + 1;
-		}else if(right != null ) {
-			lSize = right.size() + 1;
-		}
-
-		if(right != null) {
-			rSize = right.size() + 1;
-		}else if(left != null) {
-			rSize = left.size() +1;
-		}
+		int size = 1;
 		
-		return rSize + lSize;
+		if(right == null && left == null) {
+			return size =+ 1;
+		}else if(left != null && right == null) {
+			return size =+ left.size() + 1;
+		}else if(right != null && left == null) {
+			return size =+ right.size() + 1;
+		}else if (left != null && right != null) {
+			return size =+left.size() + right.size() + 1;
+		}else
+		System.out.println(size);
+		return size;
 	}
 
 	public int depth() {
