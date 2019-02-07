@@ -135,16 +135,61 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public int size() {
-		int lSize =
+		int lSize = 0;
+		int rSize = 0;
+
+		if(left != null) {
+			lSize = left.size() + 1;
+		}else if(right != null ) {
+			lSize = right.size() + 1;
+		}
+
+		if(right != null) {
+			rSize = right.size() + 1;
+		}else if(left != null) {
+			rSize = left.size() +1;
+		}
 		
-		return 0;
+		return rSize + lSize;
 	}
 
 	public int depth() {
-		return -1;
+		if(this.data == null) {
+			return -1;
+			}
+		int lDepth = 0;
+		int rDepth = 0;
+		
+		if(left != null) {
+			lDepth = left.depth() + 1;
+		}else if(right != null ) {
+			lDepth = right.depth() + 1;
+		}
+
+		if(right != null) {
+			rDepth = right.depth() + 1;
+		}else if(left != null) {
+			rDepth = left.depth() +1;
+		}
+		
+		if(rDepth < lDepth) {
+			return lDepth;
+		}else {
+			return rDepth;
+		}
+		
 	}
 
 	public String toString() {
-		return "";
+		String str = "";
+		if (left != null) {
+			str = str + left.toString() + ", ";
+		}
+		str = str + data;
+		
+		if(right != null){
+			str = str +  ", " + right.toString();
+		}
+		return str;
 	}
 }

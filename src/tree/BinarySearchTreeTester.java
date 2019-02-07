@@ -46,11 +46,13 @@ public class BinarySearchTreeTester {
 	@Test
 	public void testSize() {
 		assertEquals(6, tree.size());
+		System.out.println(tree.size());
 	}
 
 	@Test
 	public void testDepth() {
 		assertEquals(3, tree.depth());
+		System.out.println(tree.depth());
 	}
 
 	@Test
