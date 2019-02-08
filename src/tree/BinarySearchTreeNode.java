@@ -53,7 +53,6 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 			} else {
 				return left.add(data);
 			}
-
 		} else if (comp > 0) {
 			if (right == null) {
 				right = new BinarySearchTreeNode(data);
@@ -62,7 +61,6 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 				return right.add(data);
 		} else
 			return false;
-
 	}
 
 	private T findMin() {
@@ -72,32 +70,23 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 			return this.data;
 		}
 		return left.findMin();
-
-		// return null;
 	}
 
 	public BinarySearchTreeNode<T> remove(T data) {
 		if (this.data == null) {
 			return null;
 		}
-
-//		if (data == this.data) {
-//			return this;
-//		}
-
-		System.out.println("remove size " + size());
 		int comp = data.compareTo(this.data);
 
 		if (comp < 0) {
-			if(left == null) {
+			if (left == null) {
 				return this;
 			}
 			left = left.remove(data);
-
 		} else if (comp > 0) {
-			 if(right == null) {
-				 return this;
-			 }
+			if (right == null) {
+				return this;
+			}
 			right = right.remove(data);
 
 		} else {
@@ -110,46 +99,7 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 			}
 		}
 		return this;
-		// }else if (this.left == this) {
-		// this.left = (left != null) ? left : right;
-		//
-		// }else if (this.right == this) {
-		// this.right = (left != null) ? left : right;
 	}
-
-	// } else if (left != null) {
-	// return left;
-	// } else {
-	// return right;
-
-	// else if(left == null && right == null) {
-	// return this;
-	// }
-
-	// }
-	// return null;
-	// }
-
-	// return null;
-
-	// (left == null ) {
-	// return right.remove(data);
-	// }else if(right == null){
-	// return left.remove(data);
-	// }else {
-	// return this;
-	// }
-
-	// }else if(left == this) {
-	//
-	// left = ( left != null ) ? left : right;
-	//
-	// }else if(right == this) {
-	// right = ( left != null) ? left : right;
-	// }
-	// System.out.println(data);
-	// return null;
-
 	public boolean contains(T data) {
 		int comp = data.compareTo(this.data);
 
