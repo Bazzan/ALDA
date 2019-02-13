@@ -1,5 +1,5 @@
 package tree;
-
+//Sebastian Åkerlund, seae5393
 /**
  * 
  * Detta är den enda av de tre klasserna ni ska göra några ändringar i. (Om ni
