@@ -175,4 +175,24 @@ public class DHeap<AnyType extends Comparable<? super AnyType>>
          if( h.deleteMin( ) != i )
              System.out.println( "Oops! " + i );
  }
+
+public Object parentIndex(int i) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public Object firstChildIndex(int i) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public Object size() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public Object get(int i) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
