@@ -125,32 +125,32 @@ public class ALDAQueueTest {
 		}
 	}
 
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testZeroCapacity() {
-//		createNewQueue(0);
-//	}
-//
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testNegativeCapacity() {
-//		createNewQueue(-1);
-//	}
-//
+	@Test(expected = IllegalArgumentException.class)
+	public void testZeroCapacity() {
+		createNewQueue(0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testNegativeCapacity() {
+		createNewQueue(-1);
+	}
+
 	@Test
 	public void testEmptyQueueProperties() {
 		ALDAQueue<String> queue = createNewStringQueue();
 		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
 	}
-//
-//	@Test
-//	public void testPeekOnEmptyQueue() {
-//		assertEquals(null, createNewStringQueue().peek());
-//	}
-//
-//	@Test(expected = NoSuchElementException.class)
-//	public void testRemoveOnEmptyQueue() {
-//		createNewIntegerQueue().remove();
-//	}
-//
+
+	@Test
+	public void testPeekOnEmptyQueue() {
+		assertEquals(null, createNewStringQueue().peek());
+	}
+
+	@Test(expected = NoSuchElementException.class)
+	public void testRemoveOnEmptyQueue() {
+		createNewIntegerQueue().remove();
+	}
+
 	@Test(expected = NullPointerException.class)
 	public void testAddingNull() {
 		createNewStringQueue().add(null);
@@ -162,7 +162,7 @@ public class ALDAQueueTest {
 		queue.add(A_STRING);
 
 		testQueueProperties(queue, false, false, 1, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 1, "[" + A_STRING + "]");
-
+		
 		assertEquals(A_STRING, queue.peek());
 		testQueueProperties(queue, false, false, 1, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 1, "[" + A_STRING + "]");
 
@@ -187,60 +187,60 @@ public class ALDAQueueTest {
 					DEFAULT_CAPACITY - STRINGS.length + i + 1);
 		}
 	}
-//
-//	@Test
-//	public void testOtherTypeOfData() {
-//		ALDAQueue<Integer> queue = createNewIntegerQueue();
-//		queue.add(1);
-//		queue.add(2);
-//		queue.add(3);
-//		testQueueProperties(queue, false, false, 3, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 3, "[1, 2, 3]");
-//	}
-//
-//	@Test
-//	public void testAddingAndRemovingSeveralTimes() {
-//		testAddingAndRemovingSeveralElements();
-//		testAddingAndRemovingSeveralElements();
-//		testAddingAndRemovingSeveralElements();
-//	}
-//
-//	@Test(expected = IllegalStateException.class)
-//	public void testAddingToManyElements() {
-//		ALDAQueue<String> queue = createNewQueue(2);
-//		testQueueProperties(queue, true, false, 0, 2, 2, "[]");
-//		queue.add("A");
-//		queue.add("B");
-//		testQueueProperties(queue, false, true, 2, 2, 0, "[A, B]");
-//		queue.add("C");
-//	}
-//
-//	@Test
-//	public void testClear() {
-//		ALDAQueue<Integer> queue = createNewIntegerQueue();
-//		queue.add(1);
-//		queue.add(2);
-//		queue.add(3);
-//		testQueueProperties(queue, false, false, 3, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 3, "[1, 2, 3]");
-//		queue.clear();
-//		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
-//		queue.add(4);
-//		queue.add(5);
-//		testQueueProperties(queue, false, false, 2, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 2, "[4, 5]");
-//		assertEquals(Integer.valueOf(4), queue.peek());
-//		assertEquals(Integer.valueOf(4), queue.remove());
-//		assertEquals(Integer.valueOf(5), queue.peek());
-//		assertEquals(Integer.valueOf(5), queue.remove());
-//		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
-//		queue.add(6);
-//		queue.add(7);
-//		testQueueProperties(queue, false, false, 2, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 2, "[6, 7]");
-//		assertEquals(Integer.valueOf(6), queue.peek());
-//		assertEquals(Integer.valueOf(6), queue.remove());
-//		assertEquals(Integer.valueOf(7), queue.peek());
-//		assertEquals(Integer.valueOf(7), queue.remove());
-//		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
-//	}
-//
+
+	@Test
+	public void testOtherTypeOfData() {
+		ALDAQueue<Integer> queue = createNewIntegerQueue();
+		queue.add(1);
+		queue.add(2);
+		queue.add(3);
+		testQueueProperties(queue, false, false, 3, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 3, "[1, 2, 3]");
+	}
+
+	@Test
+	public void testAddingAndRemovingSeveralTimes() {
+		testAddingAndRemovingSeveralElements();
+		testAddingAndRemovingSeveralElements();
+		testAddingAndRemovingSeveralElements();
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testAddingToManyElements() {
+		ALDAQueue<String> queue = createNewQueue(2);
+		testQueueProperties(queue, true, false, 0, 2, 2, "[]");
+		queue.add("A");
+		queue.add("B");
+		testQueueProperties(queue, false, true, 2, 2, 0, "[A, B]");
+		queue.add("C");
+	}
+
+	@Test
+	public void testClear() {
+		ALDAQueue<Integer> queue = createNewIntegerQueue();
+		queue.add(1);
+		queue.add(2);
+		queue.add(3);
+		testQueueProperties(queue, false, false, 3, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 3, "[1, 2, 3]");
+		queue.clear();
+		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
+		queue.add(4);
+		queue.add(5);
+		testQueueProperties(queue, false, false, 2, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 2, "[4, 5]");
+		assertEquals(Integer.valueOf(4), queue.peek());
+		assertEquals(Integer.valueOf(4), queue.remove());
+		assertEquals(Integer.valueOf(5), queue.peek());
+		assertEquals(Integer.valueOf(5), queue.remove());
+		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
+		queue.add(6);
+		queue.add(7);
+		testQueueProperties(queue, false, false, 2, DEFAULT_CAPACITY, DEFAULT_CAPACITY - 2, "[6, 7]");
+		assertEquals(Integer.valueOf(6), queue.peek());
+		assertEquals(Integer.valueOf(6), queue.remove());
+		assertEquals(Integer.valueOf(7), queue.peek());
+		assertEquals(Integer.valueOf(7), queue.remove());
+		testQueueProperties(queue, true, false, 0, DEFAULT_CAPACITY, DEFAULT_CAPACITY, "[]");
+	}
+
 //	@Test
 //	public void testDiscriminateOnEmptyQueue() {
 //		ALDAQueue<String> queue = createNewStringQueue();
@@ -329,27 +329,27 @@ public class ALDAQueueTest {
 //	public void testDiscriminateNull() {
 //		createNewStringQueue().discriminate(null);
 //	}
-//
-//	@Test
-//	public void testAddAll() {
-//		Collection<String> oracle = new LinkedList<>(Arrays.asList(STRINGS));
-//		Collection<String> source = new HashSet<>(oracle);
-//
-//		ALDAQueue<String> queue = createNewStringQueue();
-//		queue.addAll(source);
-//
-//		while (!queue.isEmpty()) {
-//			assertTrue(oracle.remove(queue.remove()));
-//		}
-//
-//		assertTrue(oracle.isEmpty());
-//	}
-//
-//	@Test(expected = NullPointerException.class)
-//	public void testAddAllNull() {
-//		createNewStringQueue().addAll(null);
-//	}
-//
+
+	@Test
+	public void testAddAll() {
+		Collection<String> oracle = new LinkedList<>(Arrays.asList(STRINGS));
+		Collection<String> source = new HashSet<>(oracle);
+
+		ALDAQueue<String> queue = createNewStringQueue();
+		queue.addAll(source);
+
+		while (!queue.isEmpty()) {
+			assertTrue(oracle.remove(queue.remove()));
+		}
+
+		assertTrue(oracle.isEmpty());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testAddAllNull() {
+		createNewStringQueue().addAll(null);
+	}
+
 //	@Test
 //	public void testIteratorOnEmptyQueue() {
 //		ALDAQueue<String> queue = createNewStringQueue();
@@ -379,7 +379,7 @@ public class ALDAQueueTest {
 //		assertFalse(iter.hasNext());
 //		iter.next();
 //	}
-//
+
 //	@Test
 //	public void testTwoQueuesInParallel() {
 //		ALDAQueue<Integer> queue1 = createNewIntegerQueue();
@@ -473,7 +473,7 @@ public class ALDAQueueTest {
 //			testQueueProperties(queue, oracle.isEmpty(), oracle.size() == CAPACITY, oracle.size(), CAPACITY, CAPACITY
 //					- oracle.size(), oracle.toString());
 //		}
-
+//
 //	}
 
 }

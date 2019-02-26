@@ -3,126 +3,182 @@ package linear;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-public class MyQueue<E> implements ALDAQueue{
-    
-	private class Node{
+
+public class MyQueue<E> implements ALDAQueue<E> {
+
+	private static class Node<E> {
 		E element;
-		Node next;
+		Node<E> next;
+
+		public Node(E element) {
+			this.element = element;
+//			this.next = null;
+
+		}
 	}
 
-	private Node front, rear;
-	private List<E> queue;
-	private int size = 0;
+	private Node<E> front, rear;
 	private int capacity;
-	public MyQueue(int capacity) { init(); }
+	private int totalCapacity;
 
-	
-
-	
-	public void init() {
+	public MyQueue(int capacity) {
 		System.out.println("init");
+		if (capacity < 1) {
+			throw new IllegalArgumentException("It can be lesser than 1 :(");
+		} else {
+			this.capacity = capacity;
+			this.totalCapacity = capacity;
+		}
 
 		front = rear = null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void  add(E element) {
+		if(element == null) {
+			throw new NullPointerException();
+		}else if(size() >= totalCapacity()) {
+			throw new IllegalStateException();
+		}else {
+			
+			// If queue is empty, then new node is front and rear both
+			if (front == null) {
+				front = new Node<E>(element);
+				rear = front;
+				capacity--;
+				System.out.println(element + " created");
+
+			}else if (front != null){	// Add the new node at the end of queue and change rear
+				this.rear.next = new Node<E>(element);
+				this.rear = rear.next;
+				capacity--;
+			}
+			System.out.println(element + " created");
+		}
+	}
 	
-	
+	@Override
+	public void addAll(Collection<? extends E>  c) {
+		for (E e : c) {
+			this.add(e);
+		}
+
+
+	}
+
+
 	@Override
 	public Iterator iterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
+
+
+
+
 	@Override
-	public void add(Object element) {
-		if(element != null) {
-		    Node oldRear = rear;
-		    rear = new Node();
-		    rear.element = (E) element;
-		    rear.next = null;
-		    if (isEmpty()) 
-		    {
-		      front = rear;
-		    }
-		    else 
-		    {
-		      oldRear.next = rear;
-		    }
-		    size++;
+	public E remove() {
+		
+		
+		if(front != rear) {
 			
-		}
+			Node<E> node = this.front;
+			this.front = this.front.next;
+			capacity++;
 		
-		System.out.println(element + " skapades");
+			return node.element;
 		
-		// TODO Auto-generated method stub
+		}else if(front == rear && front != null) {
+			Node<E> node = this.front;
+			front = rear = null;
+			capacity++; 
+			return node.element;
+			
+		}else
+			
+		throw new NoSuchElementException();
 		
 	}
 
 	@Override
-	public void addAll(Collection c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Object remove() {
-	    E element = front.element;
-	    front = front.next;
-	    if (isEmpty()) 
-	    {
-	      rear = null;
-	    }
-	    size--;
-	    return element;
-	}
-
-	@Override
-	public Object peek() {
-		// TODO Auto-generated method stub
+	public E peek() {
+		if(front != null) {
+			return front.element;
+		}else
 		return null;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		front = rear = null;
 		
+		capacity = totalCapacity;
 	}
 
 	@Override
 	public int size() {
-
+		int size = 0;
+		for(Node<E> node = front; node != null; node = node.next ) {
+			size++;
+		}
 		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		
-		return (size == 0);
+		if(front == null) {
+//			if(rear == null) {
+			return true; //(capacity == 0);	
+//			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return (size == 100);
+		if(this.size() == totalCapacity()) {
+			return true;
+		}else {
+			return false;
+		}
+			
 	}
 
 	@Override
 	public int totalCapacity() {
-		
-		return capacity;
+
+		return totalCapacity;
 	}
 
 	@Override
 	public int currentCapacity() {
 		// TODO Auto-generated method stub
-		return 0;
+		return capacity;
 	}
 
 	@Override
-	public int discriminate(Object e) {
+	public int discriminate(E e) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public String toString() {
+		if (size() == 0)
+			return "[]";
+		String str = "[";
+		for (Node<E> node = front; node != null; node = node.next) {
+			str += node.element;
+			if (node != rear)
+				str += ", ";
+		}
+		str += "]";
+		return str;
+	}
+
+
 
 }
