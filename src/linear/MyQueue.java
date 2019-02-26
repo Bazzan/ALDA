@@ -71,11 +71,45 @@ public class MyQueue<E> implements ALDAQueue<E> {
 
 
 	@Override
-	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterator<E> iterator() {
+		return new MyIterator();
 	}
 
+	
+	private class MyIterator implements Iterator<E> {
+		private Node<E> node = null;
+
+		@Override
+		public boolean hasNext() {
+			return node != rear;
+
+		}
+
+		@Override
+		public E next() {
+			if(front == null) {
+				throw new NoSuchElementException();
+			}else if(node == null) {
+				node = front;
+				return node.element;
+			}
+			if (hasNext()) {
+				throw new NoSuchElementException();
+			}
+			node =  node.next;
+			return node.element;
+		}
+		
+		
+		
+	}
+	
+	
+	@Override
+	public int discriminate(E e) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 
@@ -160,11 +194,7 @@ public class MyQueue<E> implements ALDAQueue<E> {
 		return capacity;
 	}
 
-	@Override
-	public int discriminate(E e) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	public String toString() {
 		if (size() == 0)
