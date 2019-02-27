@@ -93,7 +93,7 @@ public class MyQueue<E> implements ALDAQueue<E> {
 				node = front;
 				return node.element;
 			}
-			if (hasNext()) {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
 			node =  node.next;
@@ -107,8 +107,37 @@ public class MyQueue<E> implements ALDAQueue<E> {
 	
 	@Override
 	public int discriminate(E e) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(e == null) {
+			throw new NullPointerException();
+		}else {
+			int nodeMatches = 0;
+			MyQueue<E> queue1 = new MyQueue(totalCapacity);
+			MyQueue<E> queue2 = new MyQueue(totalCapacity);
+			MyIterator iter = new MyIterator();
+			
+			while(iter.hasNext()) {
+				if(iter.next().equals(e)) {
+					nodeMatches++;
+					front = front.next;
+					capacity++;
+					queue1.add(iter.node.element);
+				}else {
+					front = front.next;
+					capacity++;
+					queue2.add(iter.node.element);
+				}
+			}
+			
+			for(E ele : queue2) {
+				this.add(ele);
+			}
+			for(E ele : queue1) {
+				this.add(ele);
+			}
+			return nodeMatches;
+			
+		}
+		
 	}
 
 
