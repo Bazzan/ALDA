@@ -1,5 +1,5 @@
 // �ndra inte p� paketet
-package graph;
+package graph2;
 
 import static org.junit.Assert.*;
 
@@ -77,15 +77,15 @@ public class UndirectedGraphTest {
 	// Observera dock att vi kommer att k�ra testfall p� andra och betydligt
 	// st�rre grafer.
 
-	// @formatter:off
-	// graph G {
-	// A -- A [label=1]; A -- G [label=3]; G -- B [label=28];
-	// B -- F [label=5]; F -- F [label=3]; F -- H [label=1];
-	// H -- D [label=1]; H -- I [label=3]; D -- I [label=1];
-	// B -- D [label=2]; B -- C [label=3]; C -- D [label=5];
-	// E -- C [label=2]; E -- D [label=2]; J -- D [label=5];
-	// }
-	// @formatter:on
+//	 @formatter:off
+//	 graph G {
+//	 A -- A [label=1]; A -- G [label=3]; G -- B [label=28];
+//	 B -- F [label=5]; F -- F [label=3]; F -- H [label=1];
+//	 H -- D [label=1]; H -- I [label=3]; D -- I [label=1];
+//	 B -- D [label=2]; B -- C [label=3]; C -- D [label=5];
+//	 E -- C [label=2]; E -- D [label=2]; J -- D [label=5];
+//	 }
+//	 @formatter:on
 
 	private void createExampleGraph() {
 		addExampleNodes();
